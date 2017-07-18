@@ -12,17 +12,21 @@ class App extends React.Component {
   }
 
   componentWillMount(){
-    console.log('componentWillMount')
+    console.log('componentWillMount, have access to state and props, but not DOM')
+    this.setState({m:2})
   }
   render(){
     console.log('render')
-    return <button onClick={this.update}>{this.state.val}</button>
+    return <button onClick={this.update}>{this.state.val * this.state.m}</button>
   }
   componentDidMount(){
-    console.log('componentDidMount')
+    console.log('componentDidMount, have access to DOM')
+    console.log(ReactDOM.findDOMNode(this))
+    this.inc = setInterval(this.update, 500)
   }
   componentWillUnmount(){
     console.log("componentWillUnmount is when the component leaves the DOM")
+    clearInterval(this.inc)
   }
 }
 
