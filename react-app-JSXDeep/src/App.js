@@ -1,21 +1,34 @@
 import React from 'react';
 
-const App = (props) => {
-  var myStyle = {
-    backgroundColor: '#000',
-    height: 10
+class App extends React.Component {
+  render(){
+    return (
+      <Parent>
+        <div className="childA"></div>
+        {/* <div className="childB"></div> */}
+      </Parent>
+    )
   }
-  return React.createElement(
-    <div style={myStyle}>
-      <a href="#"
-        notrendered="x"
-        onClick={update}>
-        {/* this is a comment */}
-        this is the text?
-      </a>
-      {i>1 ? 'More than one': 'one'}
-      {i>1 && 'More than one'}
-    </div>
-  )
+}
+
+class Parent extends React.Component {
+  render(){
+    // console.log(this.props.children)
+    // let items = this.props.children.map(child => child)
+    
+    // let items = React.Children
+    //   .map(this.props.children, child => child)
+    
+    // let items = React.Children.toArray(this.props.children)
+    // console.log(items)
+    
+    let items = React.Children
+      .forEach(this.props.children, child => console.log(child.props.className))
+
+    let itemsTwo = React.Children.only(this.props.children)
+    // will give an error if there are multiple errors
+    console.log(itemsTwo)
+    return null
+  }
 }
 export default App;
